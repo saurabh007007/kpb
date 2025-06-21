@@ -241,7 +241,7 @@ export default function HomePage() {
             <Button
               size="lg"
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 text-lg font-semibold rounded-full"
+              className="border-white text-white hover:bg-white text-blue-600 px-8 py-4 text-lg font-semibold rounded-full"
             >
               Watch Demo
             </Button>
@@ -566,7 +566,7 @@ export default function HomePage() {
             <Button
               size="lg"
               variant="outline"
-              className="border-white/30 text-white hover:bg-white hover:text-slate-900 px-8 py-4 text-lg rounded-full"
+              className="border-white/30 text-white hover:bg-white text-slate-900 px-8 py-4 text-lg rounded-full"
             >
               Schedule Consultation
             </Button>
