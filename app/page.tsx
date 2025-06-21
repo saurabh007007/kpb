@@ -23,10 +23,12 @@ import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { useState } from "react"
+import { ColorSchemeSelector } from "@/components/color-scheme-selector"
 
 export default function HomePage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [activeNav, setActiveNav] = useState("HOME") // Add active navigation state
 
   const services = [
     {
@@ -95,7 +97,7 @@ export default function HomePage() {
                 <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
               </div>
               <div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
+                <span className="text-2xl font-bold bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] bg-clip-text text-transparent">
                   KPB Supports Solutions
                 </span>
                 <p className="text-xs text-gray-500 -mt-1">Digital Excellence Partner</p>
@@ -113,7 +115,7 @@ export default function HomePage() {
               </div>
               <Button
                 size="sm"
-                className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white"
+                className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] hover:opacity-90 text-white"
               >
                 Search
               </Button>
@@ -132,69 +134,174 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className={`${isMenuOpen ? "block" : "hidden"} lg:block`}>
             <div className="flex flex-col lg:flex-row lg:space-x-0">
-              <a
-                href="#"
-                className="group px-6 py-4 hover:bg-white/10 transition-all duration-200 border-b-2 border-transparent hover:border-cyan-400"
+              <button
+                onClick={() => {
+                  setActiveNav("HOME")
+                  setIsMenuOpen(false)
+                }}
+                className={`group px-6 py-4 hover:bg-white/10 transition-all duration-200 border-b-2 text-left lg:text-center ${
+                  activeNav === "HOME"
+                    ? "bg-white/10 border-cyan-400 text-cyan-300"
+                    : "border-transparent hover:border-cyan-400"
+                }`}
               >
                 <span className="font-medium">HOME</span>
-              </a>
+                {activeNav === "HOME" && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 lg:relative lg:mt-1 lg:mx-auto lg:w-8 lg:rounded-full"></div>
+                )}
+              </button>
 
               <div className="relative group">
                 <button
-                  className="flex items-center px-6 py-4 hover:bg-white/10 transition-all duration-200 border-b-2 border-transparent hover:border-cyan-400 w-full lg:w-auto"
+                  onClick={() => {
+                    setActiveNav("SERVICES")
+                    setIsMenuOpen(false)
+                  }}
                   onMouseEnter={() => setActiveDropdown("services")}
                   onMouseLeave={() => setActiveDropdown(null)}
+                  className={`flex items-center px-6 py-4 hover:bg-white/10 transition-all duration-200 border-b-2 w-full lg:w-auto text-left lg:text-center ${
+                    activeNav === "SERVICES"
+                      ? "bg-white/10 border-cyan-400 text-cyan-300"
+                      : "border-transparent hover:border-cyan-400"
+                  }`}
                 >
                   <span className="font-medium">SERVICES</span>
                   <ChevronDown className="ml-1 h-4 w-4" />
+                  {activeNav === "SERVICES" && (
+                    <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 lg:relative lg:mt-1 lg:mx-auto lg:w-8 lg:rounded-full lg:ml-2"></div>
+                  )}
                 </button>
                 {activeDropdown === "services" && (
-                  <div className="absolute top-full left-0 bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-64 z-50">
+                  <div className="absolute top-full left-0 bg-white text-gray-800 shadow-xl rounded-lg mt-1 w-64 z-50 border border-gray-100">
                     <div className="p-2">
-                      <a href="#" className="block px-4 py-3 hover:bg-gray-50 rounded-md transition-colors">
-                        <div className="font-medium">Cloud Infrastructure</div>
+                      <button
+                        onClick={() => {
+                          setActiveNav("SERVICES")
+                          setActiveDropdown(null)
+                          setIsMenuOpen(false)
+                        }}
+                        className="block w-full text-left px-4 py-3 hover:bg-gray-50 rounded-md transition-colors"
+                      >
+                        <div className="font-medium text-gray-800">Cloud Infrastructure</div>
                         <div className="text-sm text-gray-500">Scalable cloud solutions</div>
-                      </a>
-                      <a href="#" className="block px-4 py-3 hover:bg-gray-50 rounded-md transition-colors">
-                        <div className="font-medium">Cybersecurity</div>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setActiveNav("SERVICES")
+                          setActiveDropdown(null)
+                          setIsMenuOpen(false)
+                        }}
+                        className="block w-full text-left px-4 py-3 hover:bg-gray-50 rounded-md transition-colors"
+                      >
+                        <div className="font-medium text-gray-800">Cybersecurity</div>
                         <div className="text-sm text-gray-500">Advanced protection</div>
-                      </a>
-                      <a href="#" className="block px-4 py-3 hover:bg-gray-50 rounded-md transition-colors">
-                        <div className="font-medium">AI Solutions</div>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setActiveNav("SERVICES")
+                          setActiveDropdown(null)
+                          setIsMenuOpen(false)
+                        }}
+                        className="block w-full text-left px-4 py-3 hover:bg-gray-50 rounded-md transition-colors"
+                      >
+                        <div className="font-medium text-gray-800">AI Solutions</div>
                         <div className="text-sm text-gray-500">Intelligent automation</div>
-                      </a>
+                      </button>
                     </div>
                   </div>
                 )}
               </div>
 
-              <a
-                href="#"
-                className="px-6 py-4 hover:bg-white/10 transition-all duration-200 border-b-2 border-transparent hover:border-cyan-400"
+              <button
+                onClick={() => {
+                  setActiveNav("PRODUCTS")
+                  setIsMenuOpen(false)
+                }}
+                className={`px-6 py-4 hover:bg-white/10 transition-all duration-200 border-b-2 text-left lg:text-center relative ${
+                  activeNav === "PRODUCTS"
+                    ? "bg-white/10 border-cyan-400 text-cyan-300"
+                    : "border-transparent hover:border-cyan-400"
+                }`}
               >
                 <span className="font-medium">PRODUCTS</span>
-              </a>
-              <a
-                href="#"
-                className="px-6 py-4 hover:bg-white/10 transition-all duration-200 border-b-2 border-transparent hover:border-cyan-400"
+                {activeNav === "PRODUCTS" && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 lg:relative lg:mt-1 lg:mx-auto lg:w-8 lg:rounded-full"></div>
+                )}
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveNav("PRICING")
+                  setIsMenuOpen(false)
+                }}
+                className={`px-6 py-4 hover:bg-white/10 transition-all duration-200 border-b-2 text-left lg:text-center relative ${
+                  activeNav === "PRICING"
+                    ? "bg-white/10 border-cyan-400 text-cyan-300"
+                    : "border-transparent hover:border-cyan-400"
+                }`}
               >
                 <span className="font-medium">PRICING</span>
-              </a>
-              <a
-                href="#"
-                className="px-6 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 text-white border-b-2 border-cyan-400"
+                {activeNav === "PRICING" && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 lg:relative lg:mt-1 lg:mx-auto lg:w-8 lg:rounded-full"></div>
+                )}
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveNav("RESOURCES")
+                  setIsMenuOpen(false)
+                }}
+                className={`px-6 py-4 transition-all duration-200 border-b-2 text-left lg:text-center relative ${
+                  activeNav === "RESOURCES"
+                    ? "bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white border-[var(--color-primary)]"
+                    : "hover:bg-white/10 border-transparent hover:border-[var(--color-primary)]"
+                }`}
               >
                 <span className="font-medium">RESOURCES</span>
-              </a>
-              <a
-                href="#"
-                className="px-6 py-4 hover:bg-white/10 transition-all duration-200 border-b-2 border-transparent hover:border-cyan-400"
+                {activeNav === "RESOURCES" && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-400 lg:relative lg:mt-1 lg:mx-auto lg:w-8 lg:rounded-full"></div>
+                )}
+              </button>
+
+              <button
+                onClick={() => {
+                  setActiveNav("CONTACT")
+                  setIsMenuOpen(false)
+                }}
+                className={`px-6 py-4 hover:bg-white/10 transition-all duration-200 border-b-2 text-left lg:text-center relative ${
+                  activeNav === "CONTACT"
+                    ? "bg-white/10 border-cyan-400 text-cyan-300"
+                    : "border-transparent hover:border-cyan-400"
+                }`}
               >
                 <span className="font-medium">CONTACT US</span>
-              </a>
+                {activeNav === "CONTACT" && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 lg:relative lg:mt-1 lg:mx-auto lg:w-8 lg:rounded-full"></div>
+                )}
+              </button>
             </div>
           </div>
         </div>
+
+        {/* Active Section Indicator */}
+        {/* <div className="bg-slate-900/50 border-t border-slate-600/30">
+          <div className="container mx-auto px-4 py-2">
+            <div className="flex items-center justify-between text-sm">
+              <div className="flex items-center space-x-2">
+                <div className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"></div>
+                <span className="text-gray-300">Current Section:</span>
+                <span className="text-cyan-300 font-medium">{activeNav}</span>
+              </div>
+              <div className="hidden md:flex items-center space-x-4 text-gray-400">
+                <span>🌐 Global Support</span>
+                <span>•</span>
+                <span>⚡ 24/7 Available</span>
+                <span>•</span>
+                <span>🔒 Secure & Trusted</span>
+              </div>
+            </div>
+          </div>
+        </div> */}
       </nav>
 
       {/* Enhanced Hero Section */}
@@ -233,7 +340,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               size="lg"
-              className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-full"
+              className="bg-white text-[var(--color-primary)] hover:bg-gray-100 px-8 py-4 text-lg font-semibold rounded-full"
             >
               Get Started Today
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -255,7 +362,7 @@ export default function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="text-4xl font-bold text-transparent bg-gradient-to-r from-cyan-500 to-blue-600 bg-clip-text mb-2">
+                <div className="text-4xl font-bold text-transparent bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] bg-clip-text mb-2">
                   {stat.number}
                 </div>
                 <div className="text-gray-600 font-medium">{stat.label}</div>
@@ -460,7 +567,7 @@ export default function HomePage() {
                 className="group hover:shadow-2xl transition-all duration-300 border-0 shadow-lg bg-gradient-to-br from-white to-gray-50/50 overflow-hidden"
               >
                 <CardHeader className="p-8 pb-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-blue-600 rounded-2xl mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                  <div className="w-16 h-16 bg-gradient-to-br from-[var(--color-primary)] to-[var(--color-secondary)] rounded-2xl mx-auto mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 shadow-lg">
                     <service.icon className="h-8 w-8 text-white" />
                   </div>
                   <CardTitle className="text-2xl text-center text-slate-800 mb-4">{service.title}</CardTitle>
@@ -475,7 +582,7 @@ export default function HomePage() {
                       </div>
                     ))}
                   </div>
-                  <Button className="w-full mt-6 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white">
+                  <Button className="w-full mt-6 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] hover:opacity-90 text-white">
                     Learn More
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
@@ -558,7 +665,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white px-8 py-4 text-lg rounded-full shadow-xl"
+              className="bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] hover:opacity-90 text-white px-8 py-4 text-lg rounded-full shadow-xl"
             >
               Get Started Free
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -566,7 +673,7 @@ export default function HomePage() {
             <Button
               size="lg"
               variant="outline"
-              className="border-white/30 text-white hover:bg-white text-slate-900 px-8 py-4 text-lg rounded-full"
+              className="border-white/30 text-whitebg-whitetext-slate-900 px-8 py-4 text-lg rounded-full"
             >
               Schedule Consultation
             </Button>
@@ -606,13 +713,13 @@ export default function HomePage() {
                 strategic partnerships that drive business growth.
               </p>
               <div className="flex space-x-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
+                <div className="w-10 h-10 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
                   <span className="text-sm font-bold">f</span>
                 </div>
-                <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
+                <div className="w-10 h-10 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
                   <span className="text-sm font-bold">t</span>
                 </div>
-                <div className="w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
+                <div className="w-10 h-10 bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] rounded-full flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
                   <span className="text-sm font-bold">in</span>
                 </div>
               </div>
@@ -670,6 +777,9 @@ export default function HomePage() {
           </div>
         </div>
       </footer>
+
+      {/* Color Scheme Selector */}
+      <ColorSchemeSelector />
     </div>
   )
 }
