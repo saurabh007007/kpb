@@ -245,6 +245,22 @@ export default function HomePage() {
                   <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 lg:relative lg:mt-1 lg:mx-auto lg:w-8 lg:rounded-full"></div>
                 )}
               </button>
+              <button
+                onClick={() => {
+                  setActiveNav("ABOUT")
+                  setIsMenuOpen(false)
+                }}
+                className={`px-6 py-4 transition-all duration-200 border-b-2 text-left lg:text-center relative ${
+                  activeNav === "RESOURCES"
+                    ? "bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] text-white border-[var(--color-primary)]"
+                    : "hover:bg-white/10 border-transparent hover:border-[var(--color-primary)]"
+                }`}
+              >
+                <span className="font-medium">ABOUT</span>
+                {activeNav === "RESOURCES" && (
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-yellow-400 to-orange-400 lg:relative lg:mt-1 lg:mx-auto lg:w-8 lg:rounded-full"></div>
+                )}
+              </button>
 
               <button
                 onClick={() => {
